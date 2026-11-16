@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>V2 墨线蓝图 · DreamOfXM 知行</title>
+<style>
+/* V2 墨线蓝图：青晒图纸+白细线+坐标注记 · 构图=图版/明细表双栏 · 对象=绘制的图版 */
+:root{
+  --bp:#12324A; --bp2:#0E2839; --w:#E8F0F4; --dim:#9FB6C2; --faint:#6A8598;
+  --line:rgba(232,240,244,.5); --hair:rgba(232,240,244,.16); --accent:#F0C987;
+  --serif:"Songti SC","Noto Serif SC",serif; --sans:-apple-system,"PingFang SC",sans-serif;
+  --mono:"SF Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bp);color:var(--w);font-family:var(--sans)}
+a{color:inherit;text-decoration:none}
+.grid-bg{position:fixed;inset:0;pointer-events:none;
+  background-image:linear-gradient(var(--hair) 1px,transparent 1px),linear-gradient(90deg,var(--hair) 1px,transparent 1px);
+  background-size:48px 48px}
+.top{position:relative;display:flex;align-items:center;gap:20px;padding:0 40px;height:64px;border-bottom:1px solid var(--line)}
+.mark{display:inline-grid;place-items:center;width:38px;height:38px;border:1.5px solid var(--w);font:700 13px/1 var(--serif);letter-spacing:1px}
+.brand b{font:700 17px/1 var(--serif);letter-spacing:.3em}
+.brand span{display:block;margin-top:5px;font:500 10px/1 var(--mono);letter-spacing:.34em;color:var(--faint)}
+.nav{margin-left:auto;display:flex;gap:28px}
+.nav a{font:500 13px/1 var(--sans);letter-spacing:.2em;color:var(--dim)}
+.nav a.act{color:var(--w);border-bottom:2px solid var(--accent);padding-bottom:4px}
+.dwg{display:grid;grid-template-columns:560px 1fr;min-height:calc(100vh - 64px)}
+/* 左：图版 */
+.plate{border-right:1px solid var(--line);padding:56px 48px;position:relative}
+.plate .no{font:500 11px/1 var(--mono);letter-spacing:.3em;color:var(--accent)}
+h1{margin-top:64px;font:700 96px/1.04 var(--serif);letter-spacing:.1em}
+.en{margin-top:20px;font:400 14px/1 var(--mono);letter-spacing:.58em;color:var(--dim)}
+.stmt{margin-top:44px;padding-left:20px;border-left:2px solid var(--accent);font:400 19px/2 var(--serif)}
+.stmt .en{margin-top:10px;letter-spacing:.08em;font-family:var(--sans);font-size:12.5px;color:var(--faint)}
+.dimline{position:absolute;left:48px;right:48px;bottom:120px;display:flex;align-items:center;gap:0;color:var(--faint);font:400 10px/1 var(--mono);letter-spacing:.2em}
+.dimline::before,.dimline::after{content:"";flex:1;height:1px;background:var(--line)}
+.dimline i{font-style:normal;padding:0 12px}
+.plate-foot{position:absolute;left:48px;bottom:48px;right:48px;display:flex;justify-content:space-between;font:400 10px/1 var(--mono);letter-spacing:.22em;color:var(--faint);border-top:1px solid var(--line);padding-top:12px}
+/* 右：明细表 */
+.sheet{padding:56px 48px 80px}
+.sheet-head{display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:14px}
+.sheet-head b{font:700 20px/1 var(--serif);letter-spacing:.24em}
+.sheet-head span{font:400 11px/1 var(--mono);letter-spacing:.26em;color:var(--faint)}
+table{width:100%;border-collapse:collapse}
+th{font:500 10px/1 var(--mono);letter-spacing:.3em;color:var(--faint);text-align:left;padding:16px 10px 10px;border-bottom:1px solid var(--line)}
+td{padding:13px 10px;border-bottom:1px solid var(--hair);vertical-align:top}
+td.no{font:500 12px/1.4 var(--mono);color:var(--faint)}
+td.nm{font:600 15.5px/1.4 var(--serif);letter-spacing:.04em;white-space:nowrap}
+td.nm span{display:block;font:400 10.5px/1.6 var(--mono);color:var(--faint);letter-spacing:.1em}
+td.ds{font:400 12.5px/1.7 var(--sans);color:var(--dim)}
+td.st{font:500 10px/1 var(--mono);letter-spacing:.16em;white-space:nowrap}
+td.st i{font-style:normal;display:inline-block;border:1px solid var(--line);padding:4px 8px;color:var(--w)}
+td.st.live i{color:var(--accent);border-color:var(--accent)}
+td.st.hold i{color:var(--faint);border-color:var(--hair)}
+.about{margin-top:56px;display:grid;grid-template-columns:1fr 200px;gap:40px;border:1px solid var(--line);padding:28px}
+.about h2{font:700 16px/1 var(--serif);letter-spacing:.3em;margin-bottom:14px}
+.about p{font:400 15px/2 var(--serif)}
+.about .c{font:400 12px/2.2 var(--mono);color:var(--dim)}
+.about .c b{color:var(--accent)}
+.corner{position:fixed;right:14px;bottom:14px;font:400 9px/1 var(--mono);letter-spacing:.2em;color:var(--faint)}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<header class="top">
+  <span class="mark">知行</span>
+  <div class="brand"><b>知行</b><span>DREAMOFXM · HQ</span></div>
+  <nav class="nav"><a class="act" href="#works">作品</a><a href="#about">关于</a><a href="#contact">联系</a><a>中 / EN</a></nav>
+</header>
+<div class="dwg">
+  <section class="plate">
+    <p class="no">DWG NO. XM-2026-001 · 个人数字资产总图</p>
+    <h1>知行</h1>
+    <p class="en">DREAM OF XM</p>
+    <p class="stmt">知行合一。想法，做成能用的东西。<span class="en">To know and to act — ideas, built, one by one.</span></p>
+    <div class="dimline"><i>SCALE 1 : 15 WORKS</i></div>
+    <div class="plate-foot"><span>绘制 DREAMOFXM</span><span>审定 知行</span><span>版本 REV.2026.11</span></div>
+  </section>
+  <section class="sheet" id="works">
+    <div class="sheet-head"><b>作品明细表</b><span>SCHEDULE OF WORKS · 15</span></div>
+    <table>
+      <thead><tr><th>NO.</th><th>名称</th><th>说明</th><th>状态</th></tr></thead>
+      <tbody>
+        <tr><td class="no">01</td><td class="nm">燎原<span>LIAOYUAN</span></td><td class="ds">毛泽东选集五卷研读社区，229 篇全文与讨论室。</td><td class="st"><i>长期工程</i></td></tr>
+        <tr><td class="no">02</td><td class="nm">星火<span>XINGHUO</span></td><td class="ds">真实就医经验分享平台，公益运行。</td><td class="st live"><i>上线</i></td></tr>
+        <tr><td class="no">03</td><td class="nm">上海浮生记<span>SHANGHAI LIFE</span></td><td class="ds">沪漂人生模拟游戏，从落沪到扎根的十年。</td><td class="st"><i>春节前发布</i></td></tr>
+        <tr><td class="no">04</td><td class="nm">E6B Wingman<span>E6B</span></td><td class="ds">飞行员的专业计算器。</td><td class="st hold"><i>在审</i></td></tr>
+        <tr><td class="no">05</td><td class="nm">TideLoom<span>TIDELOOM</span></td><td class="ds">潮汐渔猎日历。</td><td class="st hold"><i>在审</i></td></tr>
+        <tr><td class="no">06</td><td class="nm">HiveYard<span>HIVEYARD</span></td><td class="ds">蜂场管理与蜂群日志。</td><td class="st hold"><i>在审</i></td></tr>
+        <tr><td class="no">07</td><td class="nm">SwellLog<span>SWELLLOG</span></td><td class="ds">冲浪者的海况日志。</td><td class="st"><i>已就绪</i></td></tr>
+        <tr><td class="no">08</td><td class="nm">ArrowLab<span>ARROWLAB</span></td><td class="ds">射箭训练记录与环数分析。</td><td class="st hold"><i>在审</i></td></tr>
+        <tr><td class="no">09</td><td class="nm">Diveline<span>DIVELINE</span></td><td class="ds">潜水日志与潜点记录。</td><td class="st hold"><i>受阻</i></td></tr>
+        <tr><td class="no">10</td><td class="nm">Enthousia<span>ENTHOUSIA</span></td><td class="ds">专注仪式感的小工具。</td><td class="st hold"><i>筹备重提</i></td></tr>
+        <tr><td class="no">11</td><td class="nm">agent-ping<span>AGENT-PING</span></td><td class="ds">菜单栏 AI 用量仪表。</td><td class="st live"><i>装机可用</i></td></tr>
+        <tr><td class="no">12</td><td class="nm">InvoiceKit<span>INVOICEKIT</span></td><td class="ds">发票模板站。</td><td class="st live"><i>上线</i></td></tr>
+        <tr><td class="no">13</td><td class="nm">DailyBox<span>DAILYBOX</span></td><td class="ds">每日工具盒。</td><td class="st live"><i>上线</i></td></tr>
+        <tr><td class="no">14</td><td class="nm">明码 OpenFare<span>OPENFARE</span></td><td class="ds">明码机票比价。</td><td class="st live"><i>v1.3</i></td></tr>
+        <tr><td class="no">15</td><td class="nm">DiskWise<span>DISKWISE</span></td><td class="ds">磁盘空间清理工具。</td><td class="st live"><i>上线</i></td></tr>
+      </tbody>
+    </table>
+    <div class="about" id="about">
+      <div><h2>关于 · 知行</h2><p>知行。独立开发者，一个人、一条流水线：想——做——上。</p></div>
+      <div class="c" id="contact"><h2>联系</h2><p>GitHub <b>@DreamOfXM</b></p><p style="color:var(--faint)">邮箱待补</p></div>
+    </div>
+  </section>
+</div>
+<span class="corner">BLUEPRINT · XM · SHEET 1/1</span>
+</body>
+</html>
