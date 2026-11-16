@@ -1,0 +1,50 @@
+[
+  {
+    "id": "mao",
+    "series": "知 行 的 书 架",
+    "seriesEn": "THE BOOKSHELF",
+    "title": "毛泽东选集",
+    "titleEn": "Selected Works of Mao Tse-tung",
+    "subtitle": "阅读 · 思考 · 实践",
+    "subtitleEn": "READ · THINK · PRACTICE",
+    "bottom": "燎原 · 研读",
+    "bottomEn": "LIAOYUAN · READING ROOM",
+    "caption": "毛泽东选集",
+    "captionEn": "Selected Works of Mao",
+    "description": "燎原 · 我在做的研读项目",
+    "descriptionEn": "The reading project I'm building",
+    "dialog": "book-dialog"
+  },
+  {
+    "id": "classics",
+    "series": "CHINESE LITERATURE",
+    "seriesEn": "CHINESE LITERATURE",
+    "title": "四大名著",
+    "titleEn": "The Four Classics",
+    "subtitle": "人物与故事",
+    "subtitleEn": "PEOPLE & STORIES",
+    "bottom": "水浒 · 西游 · 红楼 · 三国",
+    "bottomEn": "FOUR BOOKS · MANY WORLDS",
+    "caption": "四大名著",
+    "captionEn": "The Four Classics",
+    "description": "走进人物、关系与故事",
+    "descriptionEn": "A companion to characters and stories",
+    "href": "https://dreamofxm.github.io/chinese-literature/"
+  },
+  {
+    "id": "bamboo",
+    "series": "BAMBOO SCROLL",
+    "seriesEn": "BAMBOO SCROLL",
+    "title": "青史有故事",
+    "titleEn": "Stories from History",
+    "subtitle": "从三国读起",
+    "subtitleEn": "CHINESE HISTORY, RETOLD",
+    "bottom": "一段历史，一次重读。",
+    "bottomEn": "OLD STORIES, NEW PERSPECTIVES",
+    "caption": "Bamboo Scroll",
+    "captionEn": "Bamboo Scroll",
+    "description": "用英文读中国历史",
+    "descriptionEn": "Chinese history, told in English",
+    "href": "https://dreamofxm.github.io/bambooscroll/"
+  }
+]

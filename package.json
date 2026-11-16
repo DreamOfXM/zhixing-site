@@ -1,0 +1,12 @@
+{
+  "name": "zhixing-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "deploy": "node scripts/build.mjs && wrangler pages deploy dist --project-name=zhixing"
+  },
+  "dependencies": {
+    "markdown-it": "^14.1.0"
+  }
+}

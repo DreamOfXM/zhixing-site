@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#faf9f6">
+  <meta name="description" content="不是一份简历，也不只是一张链接清单。">
+  <title data-en="A little place of my own on the internet — Zhixing">在互联网上，留一个自己的地方 — 知行</title>
+  <link rel="icon" href="/assets-studio/sun.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/studio.css">
+</head>
+<body>
+<header class="note-top"><div class="wrap note-top-in">
+    <a class="brand" href="/" aria-label="知行 · 首页"><svg class="sunmark" viewBox="0 0 48 48" aria-hidden="true"><g stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M24 3v5m0 32v5M3 24h5m32 0h5M9 9l4 4m22 22 4 4M9 39l4-4m22-22 4-4"/><circle cx="24" cy="24" r="10" fill="currentColor" stroke="none"/></g></svg><span class="brand-name">知行</span><span class="brand-divider">/</span><span class="brand-handle">DreamOfXM</span></a>
+    <button class="lang-button" id="language" aria-label="Switch to English">EN <span aria-hidden="true">↗</span></button>
+  </div></header>
+<main class="wrap" id="top">
+  <article class="note-shell">
+    <div class="article-body">
+      <p class="draft-label" data-en="Layout sample · wording for your review">随笔样稿 · 正文待你确认</p>
+      <h1 data-en="A little place of my own on the internet">在互联网上，留一个自己的地方</h1>
+      <p class="article-deck" data-en="Not a résumé, and not just a page of links.">不是一份简历，也不只是一张链接清单。</p>
+      <p class="note-date" data-en="2026-11-16 · Zhixing">2026-11-16 · 知行</p>
+      <p data-en="I saw another developer's personal website recently. What stayed with me wasn't how impressive the site was, but something much simpler: everything they had made had a home.">最近看到了一个开发者的个人网站。吸引我的，倒不完全是网站做得多好，而是一件很简单的事：自己做过的东西，终于有了一个统一的去处。</p>
+      <p data-en="That's what I'd like to have too. My projects and open-source work in one place, alongside the things I read and the occasional thought worth keeping.">我也想有这样一个地方。把做过的项目、开源的东西放在一起，也留一点位置给阅读，给平时偶尔冒出来的想法。</p>
+      <blockquote data-en="A project you can open. A book you can turn to. A thought you can return to.">
+<p>作品可以点开，书可以翻阅，想法可以留下。</p>
+</blockquote>
+      <p data-en="A visitor could try a tool, open a book, or read a note. None of it needs to be grand. I'd rather it feel clear, comfortable, and alive.">有人来，可以试试一个小工具；也可以打开一本书，或者读一篇随笔。不需要多么宏大，希望它简单、舒服，又有一点自己的气息。</p>
+      <p data-en="I don't need to fill it all at once. A home on the internet can grow slowly, one piece at a time.">不必一下子填满。先把这个地方搭起来，再把值得留下的东西，一点一点放进来。</p>
+      <div class="article-end"><span>知行 / DreamOfXM</span><span aria-hidden="true">✳</span></div>
+    </div>
+    <section class="note-comments" id="comments" hidden><!-- 评论挂载点：将来接入 Cloudflare Workers + D1（复用燎原 /api/comments 配方）后，由脚本在此渲染评论列表与表单。 --></section>
+  </article>
+</main>
+<footer class="wrap note-foot"><a href="/">← 回到首页</a><a href="#top">回到顶部 ↑</a></footer>
+<script>(function(){var d=document;var q=new URLSearchParams(location.search);var stored=null;try{stored=localStorage.getItem('zhixing-lang')}catch(e){}
+var lang=q.get('lang')==='en'?'en':(stored==='en'?'en':'zh');
+var t=[].map.call(d.querySelectorAll('[data-en]'),function(e){return{e:e,zh:e.innerHTML,en:e.getAttribute('data-en')}});
+function apply(){d.documentElement.lang=lang==='en'?'en':'zh-CN';t.forEach(function(x){x.e.innerHTML=lang==='en'?x.en:x.zh});
+var b=d.getElementById('language');if(b){b.innerHTML=(lang==='en'?'中文':'EN')+' <span aria-hidden="true">↗</span>';b.setAttribute('aria-label',lang==='en'?'切换到中文':'Switch to English')}}
+var btn=d.getElementById('language');if(btn){btn.addEventListener('click',function(){lang=lang==='zh'?'en':'zh';try{localStorage.setItem('zhixing-lang',lang)}catch(e){}
+var u=new URL(location.href);if(lang==='en'){u.searchParams.set('lang','en')}else{u.searchParams.delete('lang')}
+history.replaceState(null,'',u);apply()})}
+apply()})();</script>
+</body>
+</html>
