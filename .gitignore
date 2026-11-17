@@ -1,3 +1,14 @@
 node_modules/
 dist/
 .DS_Store
+
+# 本地设计稿与验收留档（不入公开仓）
+/v1.html
+/v2.html
+/v3.html
+/v4.html
+/v5.html
+/v6.html
+/v7-free.html
+/index.html
+/evidence-studio/
