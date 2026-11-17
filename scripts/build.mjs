@@ -66,6 +66,7 @@ function articlePage(n) {
   <title data-en="${escAttr(n.titleEn ? n.titleEn + ' — Zhixing' : n.title + ' — 知行')}">${escHtml(n.title)} — 知行</title>
   <link rel="icon" href="/assets-studio/sun.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/studio.css">
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "22ec4a1f3e9c46c6805ec89e63fec192"}'></script>
 </head>
 <body>
 <header class="note-top"><div class="wrap note-top-in">
