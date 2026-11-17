@@ -27,20 +27,21 @@ const bookshelf = document.getElementById('bookshelf');
 const notesList = document.getElementById('notes-list');
 
 function localized(item, key) {
-  return language === 'en' ? item[`en${key[0].toUpperCase()}${key.slice(1)}`] : item[key];
+  return language === 'en' ? item[`${key}En`] : item[key];
 }
 
 function iconMarkup(project) {
   if (project.image) return `<img class="project-icon" src="${project.image}" alt="" width="47" height="47">`;
+  if (project.mark) return `<span class="project-icon seal" lang="zh" aria-hidden="true">${project.mark}</span>`;
   return `<span class="project-icon diagram" style="--tile:#f6ead9;--glyph:#a46639" aria-hidden="true"><svg viewBox="0 0 24 24">${glyphs[project.glyph]}</svg></span>`;
 }
 
 function renderProjects() {
   const shown = works.filter(project => activeFilter === 'all' ? project.selected : project.tags?.includes(activeFilter));
-  grid.innerHTML = shown.map(project => `<a class="project-card" href="${project.url}" target="_blank" rel="noopener noreferrer">
+  grid.innerHTML = shown.map(project => `<a class="project-card" href="${language === 'en' ? project.urlEn || project.url : project.url}" target="_blank" rel="noopener noreferrer">
     <div class="project-top">${iconMarkup(project)}<div><h3 class="project-name">${localized(project, 'name')}</h3><p class="project-type">${localized(project, 'type')}</p></div><span class="project-arrow" aria-hidden="true">↗</span></div>
     <p class="project-description">${localized(project, 'description')}</p>
-    <div class="project-foot"><span class="project-tag">${project.local ? (language === 'en' ? 'Local preview' : '本地预览') : project.tags.includes('open') ? (language === 'en' ? 'Open source' : '开源项目') : (language === 'en' ? 'Visit website' : '打开网站')}</span><span class="project-category">${localized(project, 'category')}</span></div>
+    <div class="project-foot"><span class="project-tag">${project.local ? (language === 'en' ? 'Local preview' : '本地预览') : new URL(project.url).hostname === 'github.com' ? (language === 'en' ? 'View on GitHub' : '查看 GitHub') : (language === 'en' ? 'Visit website' : '打开网站')}</span><span class="project-category">${localized(project, 'category')}</span></div>
   </a>`).join('');
   document.getElementById('filter-status').textContent = language === 'en' ? `${shown.length} projects shown` : `已显示 ${shown.length} 件作品`;
   catalog.replaceChildren(...works.map(project => {
@@ -50,7 +51,7 @@ function renderProjects() {
     title.textContent = localized(project, 'name');
     if (project.url) {
       const link = document.createElement('a');
-      link.href = project.url;
+      link.href = language === 'en' ? project.urlEn || project.url : project.url;
       link.target = '_blank';
       link.rel = 'noopener noreferrer';
       const arrow = document.createElement('span');
@@ -62,12 +63,16 @@ function renderProjects() {
     const description = document.createElement('p');
     description.textContent = localized(project, 'description');
     card.append(description);
+    const status = document.createElement('small');
     if (!project.url || project.local) {
-      const status = document.createElement('small');
       status.textContent = project.local ? (language === 'en' ? 'Local preview' : '本地预览') : (language === 'en' ? 'Public link to be added' : '公开地址待补充');
       status.className = project.local ? 'is-local' : '';
-      card.append(status);
+    } else {
+      status.textContent = new URL(project.url).hostname === 'github.com'
+        ? (language === 'en' ? 'Open source · GitHub' : '开源项目 · GitHub')
+        : (language === 'en' ? 'Website' : '在线网站');
     }
+    card.append(status);
     return card;
   }));
 }
@@ -76,7 +81,7 @@ function renderBooks() {
   bookshelf.innerHTML = books.map(book => {
     const inner = `<span class="book-stage"><span class="book-cover cover-${book.id}"><span class="book-series">${localized(book, 'series')}</span><span class="book-title">${localized(book, 'title')}</span><span class="book-subtitle">${localized(book, 'subtitle')}</span><span class="book-emblem" aria-hidden="true">${emblems[book.id] || ''}</span><span class="book-bottom">${localized(book, 'bottom')}</span></span></span><span class="book-caption"><strong>${localized(book, 'caption')}</strong><span aria-hidden="true">↗</span></span><span class="book-description">${localized(book, 'description')}</span>`;
     return book.href
-      ? `<a class="book-item" href="${book.href}" target="_blank" rel="noopener noreferrer">${inner}</a>`
+      ? `<a class="book-item" href="${language === 'en' ? book.hrefEn || book.href : book.href}" target="_blank" rel="noopener noreferrer">${inner}</a>`
       : `<button class="book-item" data-dialog="${book.dialog}" aria-haspopup="dialog">${inner}</button>`;
   }).join('');
 }

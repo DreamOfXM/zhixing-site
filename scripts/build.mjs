@@ -85,7 +85,7 @@ function articlePage(n) {
     <section class="note-comments" id="comments" hidden><!-- 评论挂载点：将来接入 Cloudflare Workers + D1（复用燎原 /api/comments 配方）后，由脚本在此渲染评论列表与表单。 --></section>
   </article>
 </main>
-<footer class="wrap note-foot"><a href="/">← 回到首页</a><a href="#top">回到顶部 ↑</a></footer>
+<footer class="wrap note-foot"><a href="/" data-en="← Back to home">← 回到首页</a><a href="#top" data-en="Back to top ↑">回到顶部 ↑</a></footer>
 <script>${ARTICLE_LANG_JS}</script>
 </body>
 </html>

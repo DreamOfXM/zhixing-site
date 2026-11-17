@@ -8,6 +8,7 @@
   <title data-en="A little place of my own on the internet — Zhixing">在互联网上，留一个自己的地方 — 知行</title>
   <link rel="icon" href="/assets-studio/sun.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/studio.css">
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "22ec4a1f3e9c46c6805ec89e63fec192"}'></script>
 </head>
 <body>
 <header class="note-top"><div class="wrap note-top-in">
@@ -33,7 +34,7 @@
     <section class="note-comments" id="comments" hidden><!-- 评论挂载点：将来接入 Cloudflare Workers + D1（复用燎原 /api/comments 配方）后，由脚本在此渲染评论列表与表单。 --></section>
   </article>
 </main>
-<footer class="wrap note-foot"><a href="/">← 回到首页</a><a href="#top">回到顶部 ↑</a></footer>
+<footer class="wrap note-foot"><a href="/" data-en="← Back to home">← 回到首页</a><a href="#top" data-en="Back to top ↑">回到顶部 ↑</a></footer>
 <script>(function(){var d=document;var q=new URLSearchParams(location.search);var stored=null;try{stored=localStorage.getItem('zhixing-lang')}catch(e){}
 var lang=q.get('lang')==='en'?'en':(stored==='en'?'en':'zh');
 var t=[].map.call(d.querySelectorAll('[data-en]'),function(e){return{e:e,zh:e.innerHTML,en:e.getAttribute('data-en')}});
