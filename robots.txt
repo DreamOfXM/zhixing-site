@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://dreamofxm.pages.dev/sitemap.txt
+Sitemap: https://dreamofxm.pages.dev/sitemap.xml

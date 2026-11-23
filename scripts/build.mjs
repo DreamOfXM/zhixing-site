@@ -65,6 +65,7 @@ function articlePage(n) {
   <meta name="description" content="${escAttr(n.deck || n.title)}">
   <title data-en="${escAttr(n.titleEn ? n.titleEn + ' — Zhixing' : n.title + ' — 知行')}">${escHtml(n.title)} — 知行</title>
   <link rel="icon" href="/assets-studio/sun.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://dreamofxm.pages.dev/notes/${n.slug}/">
   <link rel="stylesheet" href="/studio.css">
   <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "22ec4a1f3e9c46c6805ec89e63fec192"}'></script>
 </head>
@@ -149,15 +150,22 @@ function buildDist(notes) {
   cpSync(join(ROOT, 'robots.txt'), join(DIST, 'robots.txt'));
   const keyFile = readdirSync(ROOT).find(f => /^[a-f0-9]{32}\.txt$/.test(f));
   if (keyFile) cpSync(join(ROOT, keyFile), join(DIST, keyFile));
-  const sitemap = [BASE + '/', ...notes.filter(n => !n.draft).map(n => BASE + n.url)].join('\n') + '\n';
-  writeFileSync(join(DIST, 'sitemap.txt'), sitemap);
+  const urls = [BASE + '/', ...notes.filter(n => !n.draft).map(n => BASE + n.url)];
+  writeFileSync(join(DIST, 'sitemap.txt'), urls.join('\n') + '\n');
+  // Search Console 要合法 XML 的 sitemap
+  const today = new Date().toISOString().slice(0, 10);
+  writeFileSync(join(DIST, 'sitemap.xml'),
+    '<?xml version="1.0" encoding="UTF-8"?>\n' +
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+    urls.map(u => `  <url><loc>${u}</loc><lastmod>${today}</lastmod></url>`).join('\n') + '\n</urlset>\n');
   // GSC 验证文件通道：根目录放 google<id>.html 即自动进 dist
   for (const f of readdirSync(ROOT)) {
     if (/^google[a-f0-9]+\.html$/.test(f)) cpSync(join(ROOT, f), join(DIST, f));
   }
   // 首页 = studio.html，部署版去掉草稿 noindex
   const indexHtml = readFileSync(join(ROOT, 'studio.html'), 'utf8')
-    .replace(/\n\s*<meta name="robots" content="noindex[^"]*">/, '');
+    .replace(/\n\s*<meta name="robots" content="noindex[^"]*">/, '')
+    .replace('</head>', `  <link rel="canonical" href="${BASE}/">\n</head>`);
   writeFileSync(join(DIST, 'index.html'), indexHtml);
   // 文章页 + 清单
   writeManifest(notes, DIST);
