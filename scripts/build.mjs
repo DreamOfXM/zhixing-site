@@ -147,6 +147,8 @@ function buildDist(notes) {
   // SEO：robots.txt + sitemap.txt（新随笔自动进 sitemap）
   const BASE = 'https://dreamofxm.pages.dev';
   cpSync(join(ROOT, 'robots.txt'), join(DIST, 'robots.txt'));
+  const keyFile = readdirSync(ROOT).find(f => /^[a-f0-9]{32}\.txt$/.test(f));
+  if (keyFile) cpSync(join(ROOT, keyFile), join(DIST, keyFile));
   const sitemap = [BASE + '/', ...notes.filter(n => !n.draft).map(n => BASE + n.url)].join('\n') + '\n';
   writeFileSync(join(DIST, 'sitemap.txt'), sitemap);
   // GSC 验证文件通道：根目录放 google<id>.html 即自动进 dist
