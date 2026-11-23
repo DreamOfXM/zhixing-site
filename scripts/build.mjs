@@ -144,6 +144,15 @@ function buildDist(notes) {
     cpSync(join(ROOT, f), join(DIST, f));
   }
   cpSync(join(ROOT, 'assets-studio'), join(DIST, 'assets-studio'), { recursive: true });
+  // SEO：robots.txt + sitemap.txt（新随笔自动进 sitemap）
+  const BASE = 'https://dreamofxm.pages.dev';
+  cpSync(join(ROOT, 'robots.txt'), join(DIST, 'robots.txt'));
+  const sitemap = [BASE + '/', ...notes.filter(n => !n.draft).map(n => BASE + n.url)].join('\n') + '\n';
+  writeFileSync(join(DIST, 'sitemap.txt'), sitemap);
+  // GSC 验证文件通道：根目录放 google<id>.html 即自动进 dist
+  for (const f of readdirSync(ROOT)) {
+    if (/^google[a-f0-9]+\.html$/.test(f)) cpSync(join(ROOT, f), join(DIST, f));
+  }
   // 首页 = studio.html，部署版去掉草稿 noindex
   const indexHtml = readFileSync(join(ROOT, 'studio.html'), 'utf8')
     .replace(/\n\s*<meta name="robots" content="noindex[^"]*">/, '');
